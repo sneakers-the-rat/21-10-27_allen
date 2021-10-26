@@ -1,0 +1,262 @@
+import {Heading, Text, Quote, Appear, Link, Grid, Box, FlexBox, SlideContext, Image, UnorderedList, ListItem} from 'spectacle'
+import Overview from '../img/whole_system_black.svg'
+import flexlayers from '../img/flexlayers.svg'
+import SvgAnimator from '../components/svg_animator';
+import AutopilotLogo from '../img/autopilot_logo_banner.svg';
+import JumpingVideo from '../img/parker_jumping.mp4'
+
+import Parallax from '../img/plax-01.svg'
+import anime from 'animejs'
+import { distance } from '../components/utils';
+
+
+<Box width={1}>
+  <Heading
+      fontFamily={'headerSerif'}
+      fontSize={'160pt'}
+      textAlign={'left'}
+      lineHeight={1.0}
+      fontWeight={'bold'}
+  >
+    Autopilot:
+  </Heading>
+  <Heading textAlign={'left'} style={{marginBottom:"20px"}}>
+    <a fontFamily={'headerSerif'}
+       fontSize={'80pt'}
+       textAlign={'left'}
+       lineHeight={1.0}
+       fontStyle={'italic'}
+       href={'https://docs.auto-pi-lot.com/'}>Distributed Behavior</a>
+  </Heading>
+</Box>
+<Text><a href={"https://jon-e.net"}>Jonny Saunders</a></Text>
+<Text fontFamily="monospace">2021-10-27: Allen Institute for Neural Dynamics Workshop</Text>
+
+<Box width={3/4} margin={'40px 0 0 0'}>
+  <Quote fontSize={"2em"} fontFamily={"Source Serif Pro"} fontWeight={200} fontStyle={"italic"}>
+    In building cyberinfrastructure, the key question is not whether a problem is a “social” problem or a “technical” one. That is putting it the wrong way around. The question is whether we choose, for any given problem, a primarily social or a technical solution<br/>
+    - Bowker, Baker, Millerand, and Ribes (2010): <a fontSize={"1em"} href={"https://doi.org/10.1007/978-1-4020-9789-8_5"}>Toward Information Infrastructure Studies</a>
+  </Quote>
+</Box>
+
+<Box width={4/4} margin={'40px 0'}>
+  <Quote fontSize={"2em"} fontFamily={"Source Serif Pro"} fontWeight={200} fontStyle={"italic"}>
+    it's like encountering an alien intelligence with knowledge from the future and incredible analysis of the past<br/>
+    - anonymous, re: <a fontSize={"1em"}  href={"https://docs.auto-pi-lot.com/en/latest/changelog/v0.4.0.html#v0-4-0-become-multifarious-august-3rd-2021"}>v0.4.0 - Become Multifarious</a>
+  </Quote>
+</Box>
+
+<Box style={{position:"absolute", bottom: "10px"}}>
+<Text style={{marginTop: "6px"}} fontSize={"20pt"} fontFamily="monospace">This presentation: <a fontSize={"20pt"} href={"https://jon-e.net/21-10-27_allen"}>https://jon-e.net/21-10-27_allen</a></Text>
+<Text style={{marginTop: "6px"}} fontSize={"20pt"} fontFamily="monospace">Source: <a fontSize={"20pt"} href={"https://github.com/sneakers-the-rat/21-10-27_allen"}>https://github.com/sneakers-the-rat/21-10-27_allen</a></Text>
+<Text style={{marginTop: "6px"}} fontSize={"20pt"} fontFamily="monospace">Initial Autopilot Presentation: <a fontSize={"20pt"} href={"https://auto-pi-lot.com/presentation"}>https://auto-pi-lot.com/presentation</a></Text>
+</Box>
+
+---
+
+<FlexBox flexDirection={'row'} justifyContent={'flex-start'} marginLeft={"0px"}>
+ <Box width = {1/2}>
+   <Heading style={{lineHeight: "0.9em", marginBottom:"40px"}} textAlign={"left"}>
+     What do the next 10 years of neuroscientific experiments look like?
+   </Heading>
+   <UnorderedList style={{marginTop: "30px"}}>
+     <ListItem><strong>Lots</strong> of <strong>heterogeneous</strong> hardware, <strong>custom</strong> and <strong>off-the-shelf</strong></ListItem>
+     <ListItem><strong>All-to-all</strong>  control with <strong>realtime</strong>  data processing</ListItem>
+     <ListItem>High-dimensional <strong>naturalistic behaviors,</strong> or complex, <strong>multi-stage</strong> shaped behaviors</ListItem>
+     <ListItem><strong>High-bandwidth, multimodal</strong> (and increasingly standardized) data</ListItem>
+   </UnorderedList>
+ </Box>
+  <Appear style={{width: "100%", height: "100%"}}>
+  <Box width={1/2} style={{color: "#ffffff", backgroundColor: "#3f3f3f",
+    position: "absolute", width: "50%", height: "100%", top: 0, padding: "30px"}}>
+    <Heading color={"#FFFFFF"} textAlign={"left"} marginBottom={"20px"}>...and our tools?</Heading>
+    <br/><br/>
+    <Text color={"#FFFFFF"} style={{fontWeight:700}} fontSize={"70pt"}>Flexible</Text>
+    <Text color={"#FFFFFF"} style={{fontWeight:300}}>
+      Use any hardware, write any task.<br/>
+      A <i>framework,</i> not a package.
+    </Text>
+    <br/><br/>
+    <Text color={"#FFFFFF"} style={{fontWeight:700}} fontSize={"70pt"}>Distributed</Text>
+    <Text color={"#FFFFFF"} style={{fontWeight:300}}>
+      To scale complexity, coordinate more computers <i>and</i> more people.
+    </Text>
+    <br/><br/>
+    <Text color={"#FFFFFF"} style={{fontWeight:700}} fontSize={"70pt"}>Reproducible</Text>
+    <Text color={"#FFFFFF"} style={{fontWeight:300}}>
+      Data that is clean <i>at the time of acquisition.</i><br/>
+      Experiments that can be <i>replicated</i> on more than exactly one rig.
+    </Text>
+  </Box>
+  </Appear>
+</FlexBox>
+
+---
+
+#
+
+<SvgAnimator
+    id={'autopilot-logo'}
+    svgUrl={AutopilotLogo}
+    steps={[[
+      {
+        targets: '#autopilot-logo .st2',
+        strokeDashoffset: [anime.setDashoffset, 0],
+        duration: () => (anime.random(0, 3000)),
+        delay: () => (anime.random(1000, 3000)),
+        loop: true,
+        direction: 'alternate',
+        easing: 'easeInOutSine'
+      },
+      {
+        targets: '#autopilot-logo',
+        opacity:[0,1],
+        duration: 200,
+        easing: 'easeInOutSine'
+      }
+    ]]}
+    style={{top:"-275px", left:"-500px", transform:"scale(0.4)", transformOrigin:'center'}}
+/>
+
+<SvgAnimator
+    svgUrl={Overview}
+    id={'overview'}
+    style={{top:"250px", transform:"scale(0.7)", transformOrigin:'center'}}
+/>
+
+  <Box width={1/2} style={{left:"900px", top:"75px", position:'absolute'}}>
+    <Appear><Text
+        fontFamily={"headerSerif"}
+        fontStyle={"italic"}>
+      A Python framework for behavioral neuroscience experiments on distributed swarms of computers...
+      <br></br><br></br></Text></Appear>
+      <Appear><Text fontFamily={"headerSerif"}
+                    fontStyle={"italic"}>... and for gathering our technical expertise into a cumulative, densely linked body of knowledge</Text></Appear>
+    </Box>
+
+Notes: Modularizing the components of experiments,
+building extensible representations of the different logical components of experiments
+
+We have lots and lots of experimental tools, love them all!
+
+---
+
+# flexibility using parallaxin as an example
+
+- python as glue, easy to extend high-level classes implemented with low-level libraries. speed and flexibility!
+- extensible modules make it easy to r.y.o and wrap external tools in transforms, hardware, etc.
+- networking makes it easy to do complicated things!
+
+# reproducibility
+
+- smart about abstraction, splitting task params and metadata from implementation
+- save literally everything.
+
+
+---
+
+<div className={'blankslide'}></div>
+<Heading fontSize={"90pt"} style={{color:"#ffffff"}} caps textAlign="left">Flexibility <span style={{'color':'#ff3030'}}>in 3 Layers</span></Heading>
+
+<Image src={flexlayers} style={{objectFit:'contain', margin:'auto'}} width="90%" />
+
+---
+
+# Areas of active development
+
+<Box width={2/3} style={{margin:'40px auto auto auto'}}>
+  <UnorderedList>
+    <ListItem><Text fontSize={70} color={'tools'} fontFamily={"Source Serif Pro"} fontWeight={'bold'}>Modularization -</Text><Text> break up the pieces! use anything independently! automate integration!</Text></ListItem>
+    <ListItem><Text fontSize={70} color={'tools'} fontFamily={"Source Serif Pro"} fontWeight={'bold'}>API Stabilization -</Text><Text> make everything predictable and extensible!</Text></ListItem>
+    <ListItem><Text fontSize={70} color={'tools'} fontFamily={"Source Serif Pro"} fontWeight={'bold'}>Community Systems -</Text><Text> help everyone work together!</Text></ListItem>
+  </UnorderedList>
+</Box>
+
+---
+
+<Text
+    fontFamily={"headerSerif"}
+    fontStyle={"italic"}
+    fontSize={"60pt"}
+    style={{marginTop:"auto", marginBottom:"auto"}}>
+  Mice bob their heads to judge the distance for a jump...
+</Text>
+
+<video controls loop style={{width:"100%", margin:"auto"}}>
+  <source src={JumpingVideo} type={"video/mp4"}/>
+</video>
+
+<Text
+    fontFamily={"headerSerif"}
+    fontStyle={"italic"}
+    fontSize={"60pt"}
+    style={{marginTop:"auto", marginLeft:"auto", marginBottom:"auto"}}>
+  What do we need to study this behavior?
+</Text>
+
+<Text>Footage from Phil Parker, paper in prep</Text>
+
+---
+
+<SvgAnimator id={'autopilot-parallax'} svgUrl={Parallax}
+             steps={[
+               [
+                 {
+                   targets:'#autopilot-parallax #Layer_1 *',
+                   opacity: [0,1],
+                   strokeDashoffset: [anime.setDashoffset, 0],
+                   duration: () => (anime.random(1000, 3000)),
+                   delay: function(el){
+                     let dist = (distance(el.getBBox(), {x:325, y:267})*5)+anime.random(-1000,1000);
+                     return dist;
+                   }
+                 }
+               ],
+               [
+                 {
+                   targets: "#autopilot-parallax #cameras",
+                   opacity: [0,1],
+                   duration: 500,
+                   easing: "easeInOutQuad"
+                 }
+               ],
+               [
+                 {
+                   targets: "#autopilot-parallax #custom",
+                   opacity: [0,1],
+                   duration: 500,
+                   easing: "easeInOutQuad"
+                 }
+               ],
+               [
+                 {
+                   targets: "#autopilot-parallax #external",
+                   opacity: [0,1],
+                   duration: 500,
+                   easing: "easeInOutQuad"
+                 }
+               ],
+               [
+                 {
+                   targets: "#autopilot-parallax #imu",
+                   opacity: [0,1],
+                   duration: 500,
+                   easing: "easeInOutQuad"
+                 }
+               ]
+             ]}
+/>
+<Box height={"40px"}></Box>
+  <Heading fontFamily={"Source Serif Pro"} fontWeight={200} color={"tools"} fontSize={100}
+           fontStyle={"italic"} textAlign={"left"}>
+  p a r a l l a x i n</Heading>
+
+Notes: Important features
+
+- Integrate existing, custom hardware
+- Integrate other software libraries
+- Give space to solve common programming problems durably
+- scikit-learn or scipy for experiments
+- Allow gradual adoption and reciprocal integration
+- Replicability
+

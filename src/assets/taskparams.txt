@@ -1,0 +1,21 @@
+{
+"step_name" : "tone_discrim",
+"task_type" : "2AFC",
+"bias_mode" : 0,
+"punish_sound" : false,
+"stim" : {
+  "sounds" : {
+    "L": {
+		"duration" : 100, 
+		"frequency" : 10000, 
+		"type" : "tone", 
+		"amplitude" : 0.01},
+	"R": {"...":"..."}}}, 
+"reward": {
+	"type" : "volume",
+	"volume" : 20},
+"graduation" : {
+	"type" : "accuracy", 
+	"threshold" : 0.75, 
+	"window" : 400}
+}

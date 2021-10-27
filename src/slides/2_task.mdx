@@ -1,22 +1,49 @@
 import task from '../assets/minimal_task.txt';
-import {Heading, Text, Quote, Appear, Link, Grid, Box, FlexBox, SlideContext, Image, UnorderedList, ListItem, CodePane} from 'spectacle'
+import taskparams from '../assets/taskparams.txt';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import {Heading, Text, Layout, Quote, Appear, Link, Grid, Box, FlexBox, SlideContext, Image, UnorderedList, ListItem, CodePane} from 'spectacle'
 import funky from 'react-syntax-highlighter/dist/cjs/styles/prism/funky'; import {Code} from '@material-ui/icons';
+import topologies from '../img/topologies.png'
 
-# Abstraction: Tasks, Parameters, and Prefs
 
-Right side, parameterization
+# Abstraction!! Tasks, Parameters, and Prefs
 
-<Box width={2/3} marginLeft={'auto'} marginRight={'auto'}
+
+
+<FlexBox>
+<Box width={45/100} marginRight={'auto'}
+  style={{overflow:"clip"}}
 >
+  <Text>2AFC (pseudocode)</Text>
 <CodePane language={"python"} theme={funky}
           highlightRanges={[
-            [10,15],[17,19],[21,25],[27,35],[41,42],[44,47],[49,58],60,62,[65,70]
+          [1,8],[10,13],[15,20],22
           ]}>
 {task}
-</CodePane></Box>
+</CodePane>
+</Box>
+  <Box width={45/100} marginBottom={"auto"} marginRight={"auto"}>
+  <Appear id={"task5"}>
+    <Text>Portable Task Parameterizations!</Text>
+    <SyntaxHighlighter
+        customStyle={{width:"100%"}}
+        language={"json"}
+        wrapLines
+        showLineNumbers
+        style={funky}
+    >
+      {taskparams}
+    </SyntaxHighlighter>
+  </Appear>
+  </Box>
+</FlexBox>
 
 ---
 
-# Topologies
+<div className={'blankslide'}></div>
+
+<Heading fontSize={"90pt"} style={{color:"#ffffff"}} caps textAlign="left">
+  Multi-Agent <span style={{'color':'#ff3030'}}>Topologies</span></Heading>
+<Image src={topologies} style={{objectFit:'contain', margin:'auto'}} width="90%" />
 
 

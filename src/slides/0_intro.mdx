@@ -1,13 +1,13 @@
 import {Heading, Text, Quote, Appear, Link, Grid, Box, FlexBox, SlideContext, Image, UnorderedList, ListItem} from 'spectacle'
 import Overview from '../img/whole_system_black.svg'
-import flexlayers from '../img/flexlayers.svg'
 import SvgAnimator from '../components/svg_animator';
 import AutopilotLogo from '../img/autopilot_logo_banner.svg';
 import JumpingVideo from '../img/parker_jumping.mp4'
-
 import Parallax from '../img/plax-01.svg'
 import anime from 'animejs'
 import { distance } from '../components/utils';
+import Popup from '../components/popup';
+import hellNaw from '../img/hell_naw_short.mp4'
 
 
 <Box width={1}>
@@ -62,11 +62,11 @@ import { distance } from '../components/utils';
    <UnorderedList style={{marginTop: "30px"}}>
      <ListItem><strong>Lots</strong> of <strong>heterogeneous</strong> hardware, <strong>custom</strong> and <strong>off-the-shelf</strong></ListItem>
      <ListItem><strong>All-to-all</strong>  control with <strong>realtime</strong>  data processing</ListItem>
-     <ListItem>High-dimensional <strong>naturalistic behaviors,</strong> or complex, <strong>multi-stage</strong> shaped behaviors</ListItem>
+     <ListItem>High-dimensional <strong>naturalistic behaviors,</strong> and complex, <strong>multi-stage</strong> shaped behaviors</ListItem>
      <ListItem><strong>High-bandwidth, multimodal</strong> (and increasingly standardized) data</ListItem>
    </UnorderedList>
  </Box>
-  <Appear style={{width: "100%", height: "100%"}}>
+  <Appear id={"intro1"} style={{width: "100%", height: "100%"}}>
   <Box width={1/2} style={{color: "#ffffff", backgroundColor: "#3f3f3f",
     position: "absolute", width: "50%", height: "100%", top: 0, padding: "30px"}}>
     <Heading color={"#FFFFFF"} textAlign={"left"} marginBottom={"20px"}>...and our tools?</Heading>
@@ -118,19 +118,21 @@ import { distance } from '../components/utils';
     style={{top:"-275px", left:"-500px", transform:"scale(0.4)", transformOrigin:'center'}}
 />
 
+<Appear id={"intro2"}>
 <SvgAnimator
     svgUrl={Overview}
     id={'overview'}
     style={{top:"250px", transform:"scale(0.7)", transformOrigin:'center'}}
 />
+</Appear>
 
   <Box width={1/2} style={{left:"900px", top:"75px", position:'absolute'}}>
-    <Appear><Text
+    <Appear id={"intro3"}><Text
         fontFamily={"headerSerif"}
         fontStyle={"italic"}>
       A Python framework for behavioral neuroscience experiments on distributed swarms of computers...
       <br></br><br></br></Text></Appear>
-      <Appear><Text fontFamily={"headerSerif"}
+      <Appear id={"intro4"}><Text fontFamily={"headerSerif"}
                     fontStyle={"italic"}>... and for gathering our technical expertise into a cumulative, densely linked body of knowledge</Text></Appear>
     </Box>
 
@@ -138,39 +140,6 @@ Notes: Modularizing the components of experiments,
 building extensible representations of the different logical components of experiments
 
 We have lots and lots of experimental tools, love them all!
-
----
-
-# flexibility using parallaxin as an example
-
-- python as glue, easy to extend high-level classes implemented with low-level libraries. speed and flexibility!
-- extensible modules make it easy to r.y.o and wrap external tools in transforms, hardware, etc.
-- networking makes it easy to do complicated things!
-
-# reproducibility
-
-- smart about abstraction, splitting task params and metadata from implementation
-- save literally everything.
-
-
----
-
-<div className={'blankslide'}></div>
-<Heading fontSize={"90pt"} style={{color:"#ffffff"}} caps textAlign="left">Flexibility <span style={{'color':'#ff3030'}}>in 3 Layers</span></Heading>
-
-<Image src={flexlayers} style={{objectFit:'contain', margin:'auto'}} width="90%" />
-
----
-
-# Areas of active development
-
-<Box width={2/3} style={{margin:'40px auto auto auto'}}>
-  <UnorderedList>
-    <ListItem><Text fontSize={70} color={'tools'} fontFamily={"Source Serif Pro"} fontWeight={'bold'}>Modularization -</Text><Text> break up the pieces! use anything independently! automate integration!</Text></ListItem>
-    <ListItem><Text fontSize={70} color={'tools'} fontFamily={"Source Serif Pro"} fontWeight={'bold'}>API Stabilization -</Text><Text> make everything predictable and extensible!</Text></ListItem>
-    <ListItem><Text fontSize={70} color={'tools'} fontFamily={"Source Serif Pro"} fontWeight={'bold'}>Community Systems -</Text><Text> help everyone work together!</Text></ListItem>
-  </UnorderedList>
-</Box>
 
 ---
 
@@ -222,14 +191,6 @@ We have lots and lots of experimental tools, love them all!
                ],
                [
                  {
-                   targets: "#autopilot-parallax #custom",
-                   opacity: [0,1],
-                   duration: 500,
-                   easing: "easeInOutQuad"
-                 }
-               ],
-               [
-                 {
                    targets: "#autopilot-parallax #external",
                    opacity: [0,1],
                    duration: 500,
@@ -243,13 +204,27 @@ We have lots and lots of experimental tools, love them all!
                    duration: 500,
                    easing: "easeInOutQuad"
                  }
-               ]
+               ],
+               [
+                 {
+                   targets: "#autopilot-parallax #custom",
+                   opacity: [0,1],
+                   duration: 500,
+                   easing: "easeInOutQuad"
+                 }
+               ],
              ]}
 />
 <Box height={"40px"}></Box>
   <Heading fontFamily={"Source Serif Pro"} fontWeight={200} color={"tools"} fontSize={100}
            fontStyle={"italic"} textAlign={"left"}>
   p a r a l l a x i n</Heading>
+
+<Popup id={"intropop"}>
+  <video controls loop autoPlay style={{width:"100%", margin:"auto"}}>
+    <source src={hellNaw} type={"video/mp4"}/>
+  </video>
+</Popup>
 
 Notes: Important features
 
@@ -259,4 +234,3 @@ Notes: Important features
 - scikit-learn or scipy for experiments
 - Allow gradual adoption and reciprocal integration
 - Replicability
-

@@ -18,7 +18,7 @@ import styled from '@material-ui/styles/styled/styled'
 import TOC from './components/toc'
 
 import slides_intro, {notes as notes_intro} from './slides/0_intro.mdx';
-import slides_pieces, {notes as notes_pieces} from './slides/1_pieces.mdx';
+import slides_pieces, {notes as notes_pieces} from './slides/1_flexibility.mdx';
 import slides_task, {notes as notes_task} from './slides/2_task.mdx';
 import slides_wiki, {notes as notes_wiki} from './slides/3_wiki.mdx';
 import slides_future, {notes as notes_future} from './slides/4_future.mdx';
@@ -38,8 +38,8 @@ const toc_slides = [
     notes: notes_intro
   },
   {
-    name: 'pieces',
-    display: 'Pieces',
+    name: 'flexibility',
+    display: 'Flexibility',
     slides: slides_pieces,
     notes: notes_pieces
   },

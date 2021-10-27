@@ -71,7 +71,7 @@ module.exports = {
     // new CleanWebpackPlugin(),
     new HtmlWebPackPlugin({
       template: path.resolve( __dirname, '../public/index.html' ),
-      title: "Autopilot v0.4.0 - Worldwide Neuro"
+      title: "Autopilot - 21-10-26_allen"
     }),
     new webpack.ProvidePlugin({
       process: 'process/browser',

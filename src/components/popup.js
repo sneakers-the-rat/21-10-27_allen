@@ -11,6 +11,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles'
 import {SlideContext, useSteps} from 'spectacle';
+import PropTypes from 'prop-types';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -50,6 +51,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Popup(
   {
+    id,
     title,
     stepIndex,
       showStep,
@@ -61,7 +63,7 @@ export default function Popup(
 
   const { activeStepIndex, isSlideActive } = React.useContext(SlideContext);
   const { stepId, isActive, stepNum, placeholder } = useSteps(1, {
-    stepIndex,
+    id, stepIndex
   });
 
   if (Object.is(showStep, undefined)){
@@ -121,5 +123,6 @@ export default function Popup(
 }
 
 Popup.defaultProps = {
+  id: PropTypes.string,
   title: ""
 }

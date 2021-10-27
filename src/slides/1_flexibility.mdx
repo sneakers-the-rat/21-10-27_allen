@@ -1,0 +1,140 @@
+import {Heading, Text, Quote, Appear, Link, Grid, Box, FlexBox, SlideContext, Image, UnorderedList, ListItem, CodePane} from 'spectacle'
+import basicProg from '../assets/cliffs_basic_program.txt';
+import imuCode from '../assets/imu.txt'
+import funky from 'react-syntax-highlighter/dist/cjs/styles/prism/funky'; import {Code} from '@material-ui/icons';
+import platform from '../assets/platform.txt'
+import Paper from '@material-ui/core/Paper';
+import { IFrame } from '../components/basic';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+
+
+import flexlayers from '../img/flexlayers.svg'
+
+# Abstraction
+
+- comparison bpod-like and autopilot-like
+- glue language to low-level
+
+---
+
+# # Script Mode (# Basic Mode)
+
+<FlexBox width={4/5} style={{margin:"0 auto"}} flexDirection={"column"}>
+  <Appear id={"flex1"}>
+    <Text>GPIOs...</Text>
+    <CodePane language={"python"} theme={funky} width={100}
+    highlightRanges={[
+        [1,2],3,[4,6]
+    ]}
+    >
+      {`
+from autopilot.hardware.gpio import LED_RGB
+led = LED_RGB(r=7, g=11, b=13))                                # which pins to PWM?
+led.set((255,0,0))                                             # turn it red!
+led.flash(duration=1000, frequency=10,                         # flash green and blue at 10Hz for 1000ms
+          colors=((0,255,0),(0,0,255)))
+  `}
+    </CodePane>
+  </Appear>
+  <Appear id={"flex2"}>
+    <Text>Cameras...</Text>
+    <CodePane language={"python"} theme={funky}
+              highlightRanges={[
+                [1,2],[3,6]
+              ]}>
+      {`
+from autopilot.hardware.cameras import PiCamera
+cam = PiCamera(fps=30, exposure=0.2)
+cam.queue()                                                    # grab frames from local queue for 10s
+cam.capture(timed=10)
+  `}
+    </CodePane>
+  </Appear>
+  <Appear id={"flex3"}>
+    <Text>DLC-Live...</Text>
+    <CodePane language={"python"} theme={funky}
+              highlightRanges={[[1,2],3,[4,5]]}>
+      {`
+from autopilot import transform as t
+dlc  = t.image.DLC(model_zoo='full_human')                     # model zoo or local models!
+dlc += t.selection.DLCSlice(select=('wrist1','wrist2'))        # chain transforms!
+dlc += t.logical.Compare(                                      # Check if wrist2 is above wrist1
+  lambda x: x['wrist2'][0] > x['wrist1'][0])
+  `}
+    </CodePane>
+  </Appear>
+  <Appear id={"flex4"}>
+    <Paper style={{padding:"20px 50px", marginTop:"50px", transform:"scale(1.25)"}}>
+        <Heading>Altogether...</Heading>
+        <CodePane language={"python"} theme={funky}
+                  highlightRanges={[1,[2,3]]}>
+          {`
+while cam.capturing.is_set():
+  turn_on = dlc.process(cam.q.pop()[1])                        # bool whether wrist2 is above wrist1
+  led.set(int(turn_on))                                        # coerce to integer, 0-1 works too!
+          `}
+        </CodePane>
+    </Paper>
+  </Appear>
+</FlexBox>
+
+<Text fontSize={"20pt"} style={{position:"absolute", bottom:"20px"}}>
+  Kane, G. A., Lopes, G., Saunders, J. L., Mathis, A., & Mathis, M. W. (2020) <Link fontSize={"20pt"}  href={"https://doi.org/10.7554/eLife.61909"}>10.7554/eLife.61909</Link>
+</Text>
+
+---
+
+# Extensibility
+<Heading fontSize={'40pt'} textAlign={'center'} color={"tools"} fontWeight={200} fontStyle={"italic"}>
+  "Users" are "Developers"
+</Heading>
+
+<FlexBox style={{height: "100%", marginTop:"20px"}} justifyContent={"space-around"}>
+  <Box width={"40%"} marginBottom={"auto"}>
+    <Appear id={"flex5"}>
+    <Text>Wrap Anything! Extend Anything! <br/> eg. v4.0.3: Gammatone in a few Dozen Lines</Text>
+    <SyntaxHighlighter
+        customStyle={{width:"100%"}}
+        language={"python"}
+        wrapLines
+        showLineNumbers
+        style={funky}
+    >
+      {`import autopilot
+Noise = autopilot.get('sound', 'Noise')
+\n\
+class Gammatone(Noise):
+    def __init__(self, frequency:float, **kwargs):
+\n\
+        super(Gammatone, self).__init__(**kwargs)
+        self.frequency = float(frequency)
+\n\
+        self.filter = autopilot.get('transform', 'Gammatone')(
+            self.frequency, self.fs, axis=0, **self.kwargs)
+\n\
+    def init_sound(self):
+        # superclass generates the noise table and chunks it, so
+        # we need to apply the filter to the table and rechunk
+        super(Gammatone, self).init_sound()
+        self.table = self.filter.process(self.table)
+        self.chunk()
+`}
+    </SyntaxHighlighter>
+    </Appear>
+  </Box>
+  <Box style={{width: "50%", height:"100%"}}>
+  <Appear id={"flex6"}>
+    <Text>Documented to the Bone</Text>
+    <IFrame paper={true} flexGrow={4} style={{width:"50%", position:"absolute", height:"70%"}} src={"https://docs.auto-pi-lot.com/en/latest/transform/geometry.html#autopilot.transform.geometry.Spheroid"}/>
+  </Appear>
+  </Box>
+</FlexBox>
+---
+
+<div className={'blankslide'}></div>
+<Heading fontSize={"90pt"} style={{color:"#ffffff"}} caps textAlign="left">Flexibility <span style={{'color':'#ff3030'}}>in 3 Layers</span></Heading>
+<Image src={flexlayers} style={{objectFit:'contain', margin:'auto'}} width="90%" />
+
+
+
+

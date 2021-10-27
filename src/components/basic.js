@@ -82,13 +82,14 @@ export function Collapser({
 
 export function IFrame({
     src,
-    paper
+    paper,
+    style={width:"100%", height:"100%"}
    }){
   const { activeStepIndex, isSlideActive } = React.useContext(SlideContext);
 
 
   const renderthis = paper ?
-      <Paper elevation={1} style={{width:"100%", height:"100%"}}>
+      <Paper elevation={1} style={style}>
         {isSlideActive && <iframe frameBorder={'0'} className={'iframe-component'} width={"100%"} height={"100%"}  loading={"lazy"} src={src}/>}
           </Paper>
      :
